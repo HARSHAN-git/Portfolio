@@ -1,0 +1,134 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-glow: var(--glow);
+  --color-glow-2: var(--glow-2);
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --radius: 0.875rem;
+  --background: oklch(0.14 0.025 265);
+  --foreground: oklch(0.97 0.01 250);
+  --card: oklch(0.18 0.03 265);
+  --card-foreground: oklch(0.97 0.01 250);
+  --popover: oklch(0.18 0.03 265);
+  --popover-foreground: oklch(0.97 0.01 250);
+  --primary: oklch(0.72 0.18 195);
+  --primary-foreground: oklch(0.14 0.025 265);
+  --secondary: oklch(0.24 0.04 270);
+  --secondary-foreground: oklch(0.97 0.01 250);
+  --muted: oklch(0.22 0.03 265);
+  --muted-foreground: oklch(0.7 0.03 260);
+  --accent: oklch(0.68 0.22 305);
+  --accent-foreground: oklch(0.97 0.01 250);
+  --destructive: oklch(0.65 0.24 25);
+  --destructive-foreground: oklch(0.97 0.01 250);
+  --border: oklch(0.28 0.035 265 / 0.6);
+  --input: oklch(0.24 0.04 270);
+  --ring: oklch(0.72 0.18 195);
+  --glow: oklch(0.72 0.18 195);
+  --glow-2: oklch(0.68 0.22 305);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: "Inter", system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, var(--glow), var(--glow-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, var(--glow), var(--glow-2));
+  }
+  .glass {
+    background: color-mix(in oklab, var(--card) 50%, transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid color-mix(in oklab, var(--glow) 15%, transparent);
+  }
+  .glass-hover:hover {
+    border-color: color-mix(in oklab, var(--glow) 45%, transparent);
+    box-shadow: 0 0 40px -10px color-mix(in oklab, var(--glow) 35%, transparent);
+  }
+  .glow-primary {
+    box-shadow: 0 0 60px -10px color-mix(in oklab, var(--glow) 50%, transparent);
+  }
+  .glow-accent {
+    box-shadow: 0 0 60px -10px color-mix(in oklab, var(--glow-2) 50%, transparent);
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(color-mix(in oklab, var(--glow) 10%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in oklab, var(--glow) 10%, transparent) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  .radial-fade {
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-30px) translateX(10px); }
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .animate-float { animation: float 8s ease-in-out infinite; }
+  .animate-blink { animation: blink 1s step-end infinite; }
+}
